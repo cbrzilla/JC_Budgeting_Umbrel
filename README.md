@@ -19,5 +19,10 @@ This is a custom Umbrel Community App Store repo for JC Budgeting Server.
 2. Wait for the Publish Umbrel Image GitHub Action to complete successfully.
 3. Open the JC Budgeting App Store entry.
 4. Install JC Budgeting Server.
-5. Open the app in Umbrel and go through /setup.
-6. Connect the JC Budgeting desktop or phone client to your Umbrel device on port 5099.
+5. Open the app in Umbrel and go through /server.
+6. Install JC Budgeting clients from: https://github.com/cbrzilla/JC_Budgeting_Client
+7. Connect the JC Budgeting desktop or phone client to your Umbrel device on port 5099.
+
+## Links
+- Umbrel repo: https://github.com/cbrzilla/JC_Budgeting_Umbrel
+- Client installs: https://github.com/cbrzilla/JC_Budgeting_Client

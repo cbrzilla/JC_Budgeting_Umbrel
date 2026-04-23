@@ -11,11 +11,11 @@ description: >-
   connect your clients to your Umbrel device on port 5099.
 releaseNotes: "Initial Umbrel app-store test package."
 developer: Cliff Flanders
-website: https://github.com/cbrzilla/JC_Budgeting_App
-repo: https://github.com/cbrzilla/JC_Budgeting_App
-support: https://github.com/cbrzilla/JC_Budgeting_App/issues
+website: https://github.com/cbrzilla/JC_Budgeting_Umbrel
+repo: https://github.com/cbrzilla/JC_Budgeting_Umbrel
+support: https://github.com/cbrzilla/JC_Budgeting_Umbrel/issues
 port: 32599
-path: /setup
+path: /server
 defaultUsername: ""
 defaultPassword: ""
 gallery: []

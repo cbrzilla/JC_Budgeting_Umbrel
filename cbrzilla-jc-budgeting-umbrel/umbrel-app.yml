@@ -4,11 +4,28 @@ category: finance
 name: JC Budgeting Server
 version: "0.9.0-test"
 tagline: Host a JCBudgeting database on Umbrel
-description: >-
-  JC Budgeting Server hosts a JCBudgeting database so the desktop client,
-  phones, and other devices on your network can connect to the same budget.
-  Use the built-in setup page to create or select the active database, then
-  connect your clients to your Umbrel device on port 5099.
+description: |
+  Host a shared JC Budgeting database on your Umbrel.
+
+  What this app does:
+  - Stores your JC Budgeting database on Umbrel
+  - Lets desktop clients, phones, and other devices connect to the same budget
+  - Gives you a built-in server page to create or select the active database
+
+  How to use it:
+  1. Install and open JC Budgeting Server on Umbrel
+  2. Open the built-in /server page and create or select a database
+  3. Connect your JC Budgeting clients to your Umbrel device on port 5099
+
+  Client installs:
+  https://github.com/cbrzilla/JC_Budgeting_Client
+
+  Copyright (c) 2026 Cliff Flanders
+  All rights reserved.
+  This software is proprietary and confidential.
+  You may not modify or reverse engineer this software without explicit permission from the author.
+  This software is provided "as is", without warranty of any kind.
+  This software is for personal use only and must not be used for commercial purposes.
 releaseNotes: "Initial Umbrel app-store test package."
 developer: Cliff Flanders
 website: https://github.com/cbrzilla/JC_Budgeting_Umbrel

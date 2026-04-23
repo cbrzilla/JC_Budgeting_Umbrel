@@ -14,7 +14,7 @@ developer: Cliff Flanders
 website: https://github.com/cbrzilla/JC_Budgeting_Umbrel
 repo: https://github.com/cbrzilla/JC_Budgeting_Umbrel
 support: https://github.com/cbrzilla/JC_Budgeting_Umbrel/issues
-icon: https://raw.githubusercontent.com/cbrzilla/JC_Budgeting_Umbrel/main/cbrzilla-jc-budgeting-umbrel/icon.svg
+icon: https://raw.githubusercontent.com/cbrzilla/JC_Budgeting_Umbrel/main/cbrzilla-jc-budgeting-umbrel/icon.png
 port: 32599
 path: /server
 defaultUsername: ""

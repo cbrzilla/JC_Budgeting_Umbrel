@@ -2,7 +2,7 @@
 id: cbrzilla-jc-budgeting-umbrel
 category: finance
 name: JC Budgeting Server
-version: "0.9.1-test"
+version: "0.9.0-test"
 tagline: Host a JCBudgeting database on Umbrel
 description: >-
   JC Budgeting Server hosts a JCBudgeting database so the desktop client,
@@ -14,6 +14,7 @@ developer: Cliff Flanders
 website: https://github.com/cbrzilla/JC_Budgeting_Umbrel
 repo: https://github.com/cbrzilla/JC_Budgeting_Umbrel
 support: https://github.com/cbrzilla/JC_Budgeting_Umbrel/issues
+icon: https://raw.githubusercontent.com/cbrzilla/JC_Budgeting_Umbrel/main/cbrzilla-jc-budgeting-umbrel/icon.svg
 port: 32599
 path: /server
 defaultUsername: ""

@@ -1,9 +1,9 @@
 ﻿JCBudgeting Umbrel App Store Package
-BuiltAt: 2026-04-22T23:53:59
+BuiltAt: 2026-04-23T00:04:57
 Configuration: Release
-Version: 0.9.1-test
+Version: 0.9.0-test
 StoreId: cbrzilla
 AppId: cbrzilla-jc-budgeting-umbrel
-ContainerImage: ghcr.io/cbrzilla/jc-budgeting-server-umbrel:0.9.1-test
-StoreRoot: E:\JCBudgeting\Code\JCBudgeting\JCBudgeting\artifacts\TestDeployment_20260422_235324\umbrel-app-store-repo
-AppRoot: E:\JCBudgeting\Code\JCBudgeting\JCBudgeting\artifacts\TestDeployment_20260422_235324\umbrel-app-store-repo\cbrzilla-jc-budgeting-umbrel
+ContainerImage: ghcr.io/cbrzilla/jc-budgeting-server-umbrel:0.9.0-test
+StoreRoot: E:\JCBudgeting\Code\JCBudgeting\JCBudgeting\artifacts\TestDeployment_20260423_000229\umbrel-app-store-repo
+AppRoot: E:\JCBudgeting\Code\JCBudgeting\JCBudgeting\artifacts\TestDeployment_20260423_000229\umbrel-app-store-repo\cbrzilla-jc-budgeting-umbrel

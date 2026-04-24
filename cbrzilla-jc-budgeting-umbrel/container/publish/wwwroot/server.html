@@ -205,6 +205,23 @@
             margin-top: 28px;
         }
 
+        .toggle-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .toggle-row input {
+            width: auto;
+            margin-top: 4px;
+        }
+
+        .toggle-text {
+            display: grid;
+            gap: 4px;
+        }
+
         .console-window {
             border-radius: 18px;
             border: 1px solid var(--console-border);
@@ -332,6 +349,36 @@
             </form>
 
             <div class="section">
+                <h2>Server Updates</h2>
+                <div class="status">
+                    <div class="status-card">
+                        <strong>Update Status</strong>
+                        <div id="serverUpdateStatus" class="warn">Not checked yet</div>
+                    </div>
+                    <div class="status-card">
+                        <strong>Client Downloads</strong>
+                        <div><a class="link" href="https://github.com/cbrzilla/JC_Budgeting_Client" target="_blank" rel="noreferrer">https://github.com/cbrzilla/JC_Budgeting_Client</a></div>
+                    </div>
+                </div>
+                <div class="actions">
+                    <button class="secondary" type="button" id="checkServerUpdatesButton">Check Server Updates</button>
+                </div>
+            </div>
+
+            <div class="section" id="startupSection" style="display:none;">
+                <h2>Startup</h2>
+                <div class="status-card">
+                    <label class="toggle-row">
+                        <input id="startAtOsStartup" type="checkbox">
+                        <span class="toggle-text">
+                            <span>Start JC Budgeting Server when the OS starts</span>
+                            <span class="hint" id="startupStatusMessage">Checking startup support...</span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="section">
                 <h2>Server Log</h2>
                 <div class="console-window">
                     <div class="console-header">
@@ -366,6 +413,16 @@
         const databasePathSelect = document.getElementById("databasePath");
         const logConsole = document.getElementById("logConsole");
         const logUpdatedAt = document.getElementById("logUpdatedAt");
+        const serverUpdateStatus = document.getElementById("serverUpdateStatus");
+        const checkServerUpdatesButton = document.getElementById("checkServerUpdatesButton");
+        const startupSection = document.getElementById("startupSection");
+        const startAtOsStartup = document.getElementById("startAtOsStartup");
+        const startupStatusMessage = document.getElementById("startupStatusMessage");
+
+        function isConfigFormEditing() {
+            const active = document.activeElement;
+            return !!active && form.contains(active);
+        }
 
         function parseUrls(urls) {
             const raw = (urls || "").trim();
@@ -448,6 +505,7 @@
                 ["Config File", data.configFileExists ? "Present" : "Not saved yet", data.configFileExists],
                 ["Database", data.databaseExists ? "Found" : "Missing", data.databaseExists],
                 ["Current Database", data.databasePath || "(none configured)", !!data.databasePath],
+                ["Server Version", runtime?.serverVersion || "Unavailable", !!runtime?.serverVersion],
                 ["Primary Access", asLink(data.primaryAccessUrl), !!data.primaryAccessUrl, true],
                 ["Server Page", asLink(data.setupUrl), !!data.setupUrl, true],
                 ["Client Installation", '<a class="link" href="https://github.com/cbrzilla/JC_Budgeting_Client" target="_blank" rel="noreferrer">https://github.com/cbrzilla/JC_Budgeting_Client</a>', true, true],
@@ -463,8 +521,8 @@
             `).join("");
         }
 
-        async function fetchJson(url) {
-            const response = await fetch(url, { cache: "no-store" });
+        async function fetchJson(url, options = {}) {
+            const response = await fetch(url, { cache: "no-store", ...options });
             const data = await response.json();
             if (!response.ok) {
                 throw new Error(data.error || `Request failed: ${response.status}`);
@@ -472,19 +530,78 @@
             return data;
         }
 
-        async function loadPage() {
-            const [config, runtime] = await Promise.all([
+        async function loadPage(options = {}) {
+            const { preserveEditing = false } = options;
+            const [config, runtime, startup] = await Promise.all([
                 fetchJson("/api/server-config"),
-                fetchJson("/api/server-runtime?lines=180")
+                fetchJson("/api/server-runtime?lines=180"),
+                fetchJson("/api/startup-settings").catch(error => ({
+                    isSupported: false,
+                    startAtOsStartup: false,
+                    message: error.message || "Startup settings are not available."
+                }))
             ]);
 
-            applyConfigFields(config);
+            if (!(preserveEditing && isConfigFormEditing())) {
+                applyConfigFields(config);
+            }
             renderStatus(config, runtime);
+            renderStartupSettings(startup);
             logConsole.textContent = Array.isArray(runtime.logLines) && runtime.logLines.length
                 ? runtime.logLines.join("\n")
                 : "No log output available yet.";
             logConsole.scrollTop = logConsole.scrollHeight;
             logUpdatedAt.textContent = `Updated ${new Date().toLocaleTimeString()}`;
+        }
+
+        function renderStartupSettings(startup) {
+            if (!startup || !startup.isSupported) {
+                startupSection.style.display = "none";
+                startAtOsStartup.disabled = true;
+                startupStatusMessage.textContent = startup?.message || "Startup control is not available.";
+                return;
+            }
+
+            startupSection.style.display = "";
+            startAtOsStartup.disabled = false;
+            startAtOsStartup.checked = !!startup.startAtOsStartup;
+            startupStatusMessage.textContent = startup.message || "Controls whether this server starts automatically.";
+        }
+
+        async function updateStartupSetting(enabled) {
+            startAtOsStartup.disabled = true;
+            startupStatusMessage.textContent = "Updating startup setting...";
+
+            try {
+                const updated = await fetchJson("/api/startup-settings", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ startAtOsStartup: enabled })
+                });
+                renderStartupSettings(updated);
+            } catch (error) {
+                startAtOsStartup.checked = !enabled;
+                startupStatusMessage.textContent = error.message || "Could not update startup setting.";
+                startAtOsStartup.disabled = false;
+            }
+        }
+
+        async function checkServerUpdates() {
+            checkServerUpdatesButton.disabled = true;
+            serverUpdateStatus.className = "warn";
+            serverUpdateStatus.textContent = "Checking GitHub for updates...";
+
+            try {
+                const update = await fetchJson("/api/server-update");
+                serverUpdateStatus.className = update.updateAvailable ? "warn" : "ok";
+                const checkedAt = update.checkedAt ? ` Checked ${new Date(update.checkedAt).toLocaleTimeString()}.` : "";
+                serverUpdateStatus.innerHTML = `${update.statusMessage || "Update check completed."}${checkedAt}`;
+            } catch (error) {
+                serverUpdateStatus.className = "warn";
+                serverUpdateStatus.textContent = error.message || "Unable to check for server updates.";
+            } finally {
+                checkServerUpdatesButton.disabled = false;
+            }
         }
 
         form.addEventListener("submit", async (event) => {
@@ -536,9 +653,17 @@
             loadPage().catch(error => setMessage(error.message || "Could not refresh server page.", "error"));
         });
 
+        checkServerUpdatesButton.addEventListener("click", () => {
+            checkServerUpdates();
+        });
+
+        startAtOsStartup.addEventListener("change", () => {
+            updateStartupSetting(startAtOsStartup.checked);
+        });
+
         loadPage().catch(error => setMessage(error.message || "Could not load server page.", "error"));
         window.setInterval(() => {
-            loadPage().catch(() => {});
+            loadPage({ preserveEditing: true }).catch(() => {});
         }, 4000);
     </script>
 </body>

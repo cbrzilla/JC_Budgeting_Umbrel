@@ -23,8 +23,8 @@ Linux publishes are now built as self-contained packages, so Ubuntu does not nee
      - `BudgetYears`
 4. Start the server:
    - `JCBudgeting.Server.exe`
-5. Open the health endpoint in a browser:
-   - `http://<server-host>:5099/api/health`
+5. Open the server page in a browser:
+   - `http://<server-host>:5099/server`
 
 ## Linux Quick Start
 
@@ -38,7 +38,7 @@ Linux publishes are now built as self-contained packages, so Ubuntu does not nee
 4. Start it:
    - `./start-server.sh`
 5. Browse to:
-   - `http://<server-host>:5099/setup`
+   - `http://<server-host>:5099/server`
 
 If you prefer to launch the binary directly:
    - `chmod +x ./JCBudgeting.Server`
@@ -64,6 +64,9 @@ For container use, keeping the `Databases` folder on a mounted volume is the saf
 
 - `appsettings.json` contains the base defaults.
 - `budgetserver.local.json` is the machine-specific override file.
+- The server page shows live logs and can check GitHub for standalone server package updates.
+- Clients check server compatibility through `/api/health` before connecting.
+- Windows deployments can optionally launch the tray companion so the server can run in the background while the tray icon provides quick access to the server page.
 - You can also override values with environment variables:
   - `BudgetServer__DatabasePath`
   - `BudgetServer__SettingsPath`

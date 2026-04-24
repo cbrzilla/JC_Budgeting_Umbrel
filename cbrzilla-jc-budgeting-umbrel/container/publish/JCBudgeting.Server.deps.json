@@ -6,9 +6,10 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v10.0": {
-      "JCBudgeting.Server/0.9.0-test": {
+      "JCBudgeting.Server/1.0.0": {
         "dependencies": {
-          "JCBudgeting.Core": "0.9.0-test",
+          "JCBudgeting.Core": "1.0.0",
+          "Microsoft.Extensions.Hosting.WindowsServices": "10.0.0",
           "SQLitePCLRaw.bundle_e_sqlite3": "2.1.6"
         },
         "runtime": {
@@ -23,6 +24,17 @@
           "lib/net6.0/Microsoft.Data.Sqlite.dll": {
             "assemblyVersion": "6.0.28.0",
             "fileVersion": "6.0.2824.11604"
+          }
+        }
+      },
+      "Microsoft.Extensions.Hosting.WindowsServices/10.0.0": {
+        "dependencies": {
+          "System.ServiceProcess.ServiceController": "10.0.0"
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.Extensions.Hosting.WindowsServices.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.52411"
           }
         }
       },
@@ -161,21 +173,37 @@
           }
         }
       },
-      "JCBudgeting.Core/0.9.0-test": {
+      "System.ServiceProcess.ServiceController/10.0.0": {
+        "runtime": {
+          "lib/net10.0/System.ServiceProcess.ServiceController.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.52411"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net10.0/System.ServiceProcess.ServiceController.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.52411"
+          }
+        }
+      },
+      "JCBudgeting.Core/1.0.0": {
         "dependencies": {
           "Microsoft.Data.Sqlite.Core": "6.0.28"
         },
         "runtime": {
           "JCBudgeting.Core.dll": {
-            "assemblyVersion": "0.9.0.0",
-            "fileVersion": "0.9.0.0"
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       }
     }
   },
   "libraries": {
-    "JCBudgeting.Server/0.9.0-test": {
+    "JCBudgeting.Server/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -186,6 +214,13 @@
       "sha512": "sha512-mty/lKBHPZvQFTs1rDx+AIZhpWv+z9olCYWyE54tlr0tiEnX3OH1cNY+4938/hm3nDs9AGPQOi9ssAb3P4ml3w==",
       "path": "microsoft.data.sqlite.core/6.0.28",
       "hashPath": "microsoft.data.sqlite.core.6.0.28.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Hosting.WindowsServices/10.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-4jFNSKTrGd2bHjIHY+TMqcB56gtIm91fNwfqWp2SMvVAvuweAnUMDWiai1CN4boM2s0zi4xVU9rWDLjIA58tDQ==",
+      "path": "microsoft.extensions.hosting.windowsservices/10.0.0",
+      "hashPath": "microsoft.extensions.hosting.windowsservices.10.0.0.nupkg.sha512"
     },
     "SQLitePCLRaw.bundle_e_sqlite3/2.1.6": {
       "type": "package",
@@ -215,7 +250,14 @@
       "path": "sqlitepclraw.provider.e_sqlite3/2.1.6",
       "hashPath": "sqlitepclraw.provider.e_sqlite3.2.1.6.nupkg.sha512"
     },
-    "JCBudgeting.Core/0.9.0-test": {
+    "System.ServiceProcess.ServiceController/10.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-PaFmFQXX/qL1vl0CfdJUMPMYT8TOEHlcdEiOZtd4LV2rcaS/WDQM4bpECcbRM4BrD+DWkWd/jtb6iPOqAX9TWA==",
+      "path": "system.serviceprocess.servicecontroller/10.0.0",
+      "hashPath": "system.serviceprocess.servicecontroller.10.0.0.nupkg.sha512"
+    },
+    "JCBudgeting.Core/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

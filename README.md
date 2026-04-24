@@ -17,6 +17,7 @@ This is a custom Umbrel Community App Store repo for JC Budgeting Server.
 ## How To Use
 1. Add this GitHub repo as a Custom App Store in Umbrel.
 2. Wait for the Publish Umbrel Image GitHub Action to complete successfully.
+   If Umbrel keeps returning to the Install button, the container image tag usually has not been published yet.
 3. Open the JC Budgeting App Store entry.
 4. Install JC Budgeting Server.
 5. Open the app in Umbrel and go through /server.

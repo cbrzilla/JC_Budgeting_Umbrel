@@ -14,7 +14,7 @@ Commercial use is prohibited without explicit prior written permission from
 the author.
 
 This software includes third-party components that remain subject to their own
-license terms. See THIRD_PARTY_NOTICES.md.
+license terms. See THIRD_PARTY_NOTICES.md
 
 This software is provided "as is", without warranty of any kind, express or
 implied, including but not limited to the warranties of merchantability,

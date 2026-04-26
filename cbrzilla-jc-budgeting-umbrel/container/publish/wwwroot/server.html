@@ -306,6 +306,7 @@
 
                 <div class="actions" style="margin-top:0;">
                     <button class="secondary" type="button" id="createDatabaseButton">Create New Database</button>
+                    <button class="secondary" type="button" id="createSampleDatabaseButton">Create Sample Database</button>
                 </div>
 
                 <div class="hint">Server databases are stored in the server <code>Databases</code> folder. Uploaded databases keep their source file name when possible, and duplicates get a timestamp suffix automatically.</div>
@@ -410,6 +411,7 @@
         const message = document.getElementById("message");
         const statusCards = document.getElementById("statusCards");
         const createDatabaseButton = document.getElementById("createDatabaseButton");
+        const createSampleDatabaseButton = document.getElementById("createSampleDatabaseButton");
         const databasePathSelect = document.getElementById("databasePath");
         const logConsole = document.getElementById("logConsole");
         const logUpdatedAt = document.getElementById("logUpdatedAt");
@@ -669,6 +671,42 @@
             setTimeout(() => {
                 loadPage().catch(error => setMessage(error.message || "Could not refresh server page.", "error"));
             }, 400);
+        });
+
+        createSampleDatabaseButton.addEventListener("click", async () => {
+            const requestedName = window.prompt("What would you like to name the sample database file?", "sample_budget_database");
+            if (requestedName === null) {
+                setMessage("Create sample database was cancelled.", "");
+                return;
+            }
+
+            const trimmedName = requestedName.trim();
+            if (!trimmedName) {
+                setMessage("Please enter a database file name.", "error");
+                return;
+            }
+
+            const payload = collectConfigPayload();
+            payload.databasePath = trimmedName;
+
+            setMessage("Creating sample database...", "");
+            try {
+                const response = await fetch("/api/server-config/create-sample-database", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                const data = await response.json();
+                if (!response.ok) {
+                    throw new Error(data.error || "Unable to create sample database.");
+                }
+
+                applyConfigResponse(data);
+                await refreshPage();
+                setMessage(data.message || "Created sample database.", "");
+            } catch (error) {
+                setMessage(error.message || "Unable to create sample database.", "error");
+            }
         });
 
         document.getElementById("refreshButton").addEventListener("click", () => {

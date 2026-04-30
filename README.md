@@ -3,6 +3,13 @@
 ## What This Repo Is
 This is a custom Umbrel Community App Store repo for JC Budgeting Server.
 
+<p align="left">
+  <a href="https://www.youtube.com/watch?v=zbjzAUdrEmU" target="_blank">
+    Watch the Intro to JC Budgeting Video<br>
+    <img src="https://img.youtube.com/vi/zbjzAUdrEmU/maxresdefault.jpg" alt="Watch the Intro to JC Budgeting video" width="300"/>
+  </a>
+</p>
+
 ## App ID
 - Store ID: `cbrzilla`
 - App ID: `cbrzilla-jc-budgeting-umbrel`

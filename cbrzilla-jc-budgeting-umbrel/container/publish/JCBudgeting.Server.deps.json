@@ -6,9 +6,9 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v10.0": {
-      "JCBudgeting.Server/1.0.2": {
+      "JCBudgeting.Server/1.0.3": {
         "dependencies": {
-          "JCBudgeting.Core": "1.0.2",
+          "JCBudgeting.Core": "1.0.3",
           "Microsoft.Extensions.Hosting.WindowsServices": "10.0.0",
           "SQLitePCLRaw.bundle_e_sqlite3": "2.1.6"
         },
@@ -189,21 +189,21 @@
           }
         }
       },
-      "JCBudgeting.Core/1.0.2": {
+      "JCBudgeting.Core/1.0.3": {
         "dependencies": {
           "Microsoft.Data.Sqlite.Core": "6.0.28"
         },
         "runtime": {
           "JCBudgeting.Core.dll": {
-            "assemblyVersion": "1.0.2.0",
-            "fileVersion": "1.0.2.0"
+            "assemblyVersion": "1.0.3.0",
+            "fileVersion": "1.0.3.0"
           }
         }
       }
     }
   },
   "libraries": {
-    "JCBudgeting.Server/1.0.2": {
+    "JCBudgeting.Server/1.0.3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -257,7 +257,7 @@
       "path": "system.serviceprocess.servicecontroller/10.0.0",
       "hashPath": "system.serviceprocess.servicecontroller.10.0.0.nupkg.sha512"
     },
-    "JCBudgeting.Core/1.0.2": {
+    "JCBudgeting.Core/1.0.3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

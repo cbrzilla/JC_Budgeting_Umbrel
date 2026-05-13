@@ -7,7 +7,7 @@ services:
       APP_PORT: 5099
 
   web:
-    image: ghcr.io/cbrzilla/jc-budgeting-server-umbrel:1.0.2
+    image: ghcr.io/cbrzilla/jc-budgeting-server-umbrel:1.0.3
     restart: on-failure
     stop_grace_period: 1m
     environment:
